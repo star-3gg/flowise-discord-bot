@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  bot:
+    image: python:3.9-slim
+    volumes:
+      - .:/app
+    working_dir: /app
+    environment:
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN}
+      - FLOWISE_API_KEY=${FLOWISE_API_KEY}
+      - FLOWISE_API_URL=${FLOWISE_API_URL}
+      - FLOWISE_API_ENDPOINT=${FLOWISE_API_ENDPOINT}
+      - CHAT_FLOW_ID=${CHAT_FLOW_ID}
+    command: /bin/sh -c "pip install py-cord requests python-dotenv && python main.py"
