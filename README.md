@@ -48,4 +48,6 @@ source .venv/bin/Activate
 ```
 
 Install the dependencies in your virtual environment:
-`<comming soon...>`
+```sh
+pip install -r requirements.txt
+```
