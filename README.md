@@ -20,7 +20,7 @@ docker-compose up
 
 The following slash-commands can be used in your discord server, developers can always add new ones or create an issue on this repository:
 
-- `/ace <your question...>` Takes in a text question and responds with text
+- `/ask <your question...>` Takes in a text question and responds with text
 - `/echo` Responds with text `delta`. This is used for testing purposes during development
 
 All commands are automatically completed, once you start typing `/`.
