@@ -24,7 +24,6 @@ required_env_vars = [
 missing_vars = [var for var in required_env_vars if not os.getenv(var)]
 if missing_vars:
     raise ValueError(f"Missing environment variables: {', '.join(missing_vars)}")
-
 API = (
     f"{FLOWISE_API_URL}{FLOWISE_API_ENDPOINT}{CHAT_FLOW_ID}"
     if FLOWISE_API_URL and FLOWISE_API_ENDPOINT
@@ -33,21 +32,17 @@ API = (
 if API is None:
     raise ValueError("FLOWISE_API_URL and FLOWISE_API_ENDPOINT must be provided.")
 
-intents = intents = discord.Intents.all()
-# bot = discord.Bot(command_prefix="/", intents=intents)
+intents = discord.Intents.all()
 bot = discord.Bot(intents=intents)
-
 
 @bot.event
 async def on_ready():
     print(f"{bot.user} is ready and online!")
 
-
 @bot.slash_command(name="echo", description="Say hello to the bot")
 async def echo(ctx):
     print("[echo triggered]")
     await ctx.respond("delta")
-
 
 def query(payload):
     response = requests.post(
@@ -60,9 +55,8 @@ def query(payload):
     )
     return response.json()
 
-
-@bot.slash_command(name="ace", description="Ask a question to Flowise")
-async def ace(ctx, question: str):
+@bot.slash_command(name="ask", description="Ask a question, reply with model response")
+async def ask(ctx, question: str):
     await ctx.defer()
     print(f"[ace triggered] Question: {question}")
     try:
@@ -85,6 +79,5 @@ async def ace(ctx, question: str):
     except Exception as e:
         logging.error(f"Unexpected error: {e}")
         await ctx.respond("An unexpected error occurred.")
-
 
 bot.run(DISCORD_BOT_TOKEN)
